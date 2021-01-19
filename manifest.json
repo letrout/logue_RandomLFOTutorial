@@ -1,7 +1,7 @@
 {
     "header" : 
     {
-        "platform" : "prologue",
+        "platform" : "nutekt-digital",
         "module" : "modfx",
         "api" : "1.0-0",
         "dev_id" : 0,

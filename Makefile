@@ -29,7 +29,9 @@ ZIP_ARGS = -r -m -q
 
 ifeq ($(OS),Windows_NT)
 ifneq ($(MSYSTEM), MSYS)
+ifneq ($(MSYSTEM), MINGW64)
   ZIP = $(TOOLSDIR)/zip/bin/zip
+endif
 endif
 endif
 
@@ -74,7 +76,7 @@ CXXOPT = -std=c++11 -fno-rtti -fno-exceptions -fno-non-call-exceptions
 
 LDOPT = -Xlinker --just-symbols=$(LDDIR)/main_api.syms
 
-CWARN = 
+CWARN = -W -Wall -Wextra
 CXXWARN =
 
 FPU_OPTS = -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant -fcheck-new
@@ -91,7 +93,7 @@ TOPT = -mthumb -mno-thumb-interwork -DTHUMB_NO_INTERWORKING -DTHUMB_PRESENT
 # #############################################################################
 
 PKGDIR = $(PROJECT)
-PKGARCH = $(PROJECT).mnlgxdunit
+PKGARCH = $(PROJECT).ntkdigunit
 MANIFEST = manifest.json
 PAYLOAD = payload.bin
 BUILDDIR = $(PROJECTDIR)/build
