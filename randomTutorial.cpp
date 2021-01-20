@@ -39,6 +39,9 @@ float valDepth = 0;                    // Float value of the "Depth" knob from 0
 float effectDepth = 0;                 // Pre-calculated effect deviation (calculated at the knob turn event)
 uint16_t randomIndex = 0;              // Current index into the random table. 
 float currentFrequency = INITIAL_FREQUENCY;
+float Q = FIXED_Q;               // Filter resonance. This is defined as 1/Q, so a value of 2 = no resonance, and lower values = more resonance. A value of 0 may silence the filter however.
+float F = 0;                     // Filter cutoff frequency, although not quite expressed as 1:1 for frequency
+ChamberlinFilter filter;
 
 
 ////////////////////////////////////////////////////////////////////////
