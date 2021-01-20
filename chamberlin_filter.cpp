@@ -11,7 +11,6 @@
 
 #include "chamberlin_filter.hpp"
 
-// TODO: pass fs to constructor
 ChamberlinFilter::ChamberlinFilter():
 delay_1(0), delay_2(0), f1(0), fc(INITIAL_FREQUENCY), fq(FIXED_Q), out_bp(0), out_hp(0), out_lp(0), out_n(0), fs(SAMPLE_RATE)
 {
