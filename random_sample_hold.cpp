@@ -50,3 +50,27 @@ float RandomSampleHold::GetRandomValue()
 	}
 	return random_value;
 }
+
+/**
+ * Set the LFO frequency.
+ * If set below MIN_LFO_FREQ or above MAX_LFO_FREQ, set to MIN_LFO_FREQ or MAX_LFO_FREQ respectively
+ *
+ * @param freq New LFO frequency (Hz).
+ * @return 0 on success
+ * 	nonzero - failure to set, return the LFO freq
+ */
+int RandomSampleHold::SetLfoFreq(float freq)
+{
+	if (freq < MIN_LFO_FREQ)
+	{
+		lfo_freq = MIN_LFO_FREQ;
+		return lfo_freq;
+	}
+	else if (freq > MAX_LFO_FREQ)
+	{
+		lfo_freq = MAX_LFO_FREQ;
+		return lfo_freq;
+	}
+	lfo_freq = freq;
+	return 0;
+}

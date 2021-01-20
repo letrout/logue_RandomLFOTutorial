@@ -16,7 +16,7 @@
 
 #define RANDOM_TABLE_MASK 0x3FF        // The table has 1024 (0x400) values, we simply mask the increment register with this value vs "checking if value >= max then set to 0". 
 #define INITIAL_LFO_FREQUENCY 6	// On effect load this is the starting LFO rate
-#define MIN_LFO_FREQ 20			// This is the minimum rate the LFO for the "sample and hold/randomizer" will run
+#define MIN_LFO_FREQ 0			// This is the minimum rate the LFO for the "sample and hold/randomizer" will run
 #define MAX_LFO_FREQ 20			// This is the maximum rate the LFO for the "sample and hold/randomizer" will run
 #define SAMPLE_RATE 48000		// Default sample rate (samples/sec)
 
@@ -35,7 +35,6 @@ class RandomSampleHold
 		void TickLfo();
 		float GetRandomValue();
 		float GetPhaseAccum() const {return phase_accum;}
-		// TODO: validation on setters
-		void SetLfoFreq(float freq) {lfo_freq = freq;}
+		int SetLfoFreq(float freq);
 
 };
