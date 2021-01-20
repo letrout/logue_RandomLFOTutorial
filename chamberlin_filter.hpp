@@ -30,9 +30,9 @@ class ChamberlinFilter
 		float fs;		// Sample rate (samples/sec)
 
 	public:
-		// TODO: pass fs to constructor
 		ChamberlinFilter();
 		ChamberlinFilter(float fc, float q);
+		ChamberlinFilter(float fc, float q, float fs);
 		void process(float x);
 		float GetHP() const {return out_hp;}
 		float GetBP() const {return out_bp;}

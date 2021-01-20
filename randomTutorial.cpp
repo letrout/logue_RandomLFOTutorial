@@ -60,7 +60,7 @@ void MODFX_INIT(uint32_t platform, uint32_t api)
    randomIndex = 0; //index in the random table
    
    // Initialize the filter
-   filter = ChamberlinFilter{INITIAL_FREQUENCY, FIXED_Q};
+   filter = ChamberlinFilter{INITIAL_FREQUENCY, FIXED_Q, SAMPLE_RATE};
    effectDepth = INITIAL_FREQUENCY_DEVIATION;   //Initialize the initial effect depth
    
 }
