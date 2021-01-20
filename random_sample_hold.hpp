@@ -15,9 +15,9 @@
 #include "randomtable.h"
 
 #define RANDOM_TABLE_MASK 0x3FF        // The table has 1024 (0x400) values, we simply mask the increment register with this value vs "checking if value >= max then set to 0". 
-#define INITIAL_LFO_FREQUENCY 6	// On effect load this is the starting LFO rate
-#define MIN_LFO_FREQ 0			// This is the minimum rate the LFO for the "sample and hold/randomizer" will run
-#define MAX_LFO_FREQ 20			// This is the maximum rate the LFO for the "sample and hold/randomizer" will run
+#define LFO_FREQ_INIT 6	// On effect load this is the starting LFO rate
+#define LFO_FREQ_MIN 0			// This is the minimum rate the LFO for the "sample and hold/randomizer" will run
+#define LFO_FREQ_MAX 20			// This is the maximum rate the LFO for the "sample and hold/randomizer" will run
 #define SAMPLE_RATE 48000		// Default sample rate (samples/sec)
 
 class RandomSampleHold

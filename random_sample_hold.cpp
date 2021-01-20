@@ -12,7 +12,7 @@
 #include "random_sample_hold.hpp"
 
 RandomSampleHold::RandomSampleHold():
-phase_accum(0), lfo_freq(INITIAL_LFO_FREQUENCY), random_index(0), fs(SAMPLE_RATE)
+phase_accum(0), lfo_freq(LFO_FREQ_INIT), random_index(0), fs(SAMPLE_RATE)
 {
 }
 
@@ -61,14 +61,14 @@ float RandomSampleHold::GetRandomValue()
  */
 int RandomSampleHold::SetLfoFreq(float freq)
 {
-	if (freq < MIN_LFO_FREQ)
+	if (freq < LFO_FREQ_MIN)
 	{
-		lfo_freq = MIN_LFO_FREQ;
+		lfo_freq = LFO_FREQ_MIN;
 		return lfo_freq;
 	}
-	else if (freq > MAX_LFO_FREQ)
+	else if (freq > LFO_FREQ_MAX)
 	{
-		lfo_freq = MAX_LFO_FREQ;
+		lfo_freq = LFO_FREQ_MAX;
 		return lfo_freq;
 	}
 	lfo_freq = freq;
