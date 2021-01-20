@@ -14,6 +14,8 @@
 #define FC_MIN 20		// Minimum allowed center frequency (Hz)
 #define FC_MAX 22000	// Maximum center frequency (Hz)
 #define FIXED_Q 0.17	// Do not reach zero nor do not exceed 2. Lower values = more resonance.
+#define Q_MIN 0.001		// Minimum allowed Q
+#define Q_MAX 2.0		// Maximum allowed Q
 #define SAMPLE_RATE 48000	// Default sample rate (samples/sec)
 #define TWOPI 6.283185307 
 
@@ -39,9 +41,8 @@ class ChamberlinFilter
 		float GetBP() const {return out_bp;}
 		float GetLP() const {return out_lp;}
 		float GetN() const {return out_n;}
-		// TODO: make real setters with validation checks
 		int SetFc(float new_fc);
-		void SetQ(float new_q) {fq = new_q;}
+		int SetQ(float new_q);
 		// TODO: some profiling to see if inlining this does any good
 		// TODO: oversampling option
 		inline __attribute__((optimize("Ofast"),always_inline))
