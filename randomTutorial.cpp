@@ -15,6 +15,8 @@
 #include "usermodfx.h"
 #include "randomtable.h"
 
+#include "chamberlin_filter.hpp"
+
 // Defines
 #define FIXED_Q 0.17                   // Do not reach zero nor do not exceed 2. Lower values = more resonance.
 #define TWOPI 6.283185307              // 2*pi constant used by the filter   
@@ -38,21 +40,6 @@ float effectDepth = 0;                 // Pre-calculated effect deviation (calcu
 uint16_t randomIndex = 0;              // Current index into the random table. 
 float currentFrequency = INITIAL_FREQUENCY;
 
-//Chamberlin filter variables. Ideally, these would all be in a filter class or at least a struct, 
-// but for the this demo we will just declare these here, as they must persist. 
-// I find these much easier to use than biquads, and are described in the book "Musical Applications For Microprocessors", by Hal Chamberlin.
-
-float D1 = 0;                    // Used internally by the filter (1-sample delay for bandpass filter)
-float D2 = 0;                    // Used internally by the filter (1-sample delay for low pass filter)
-float Q = FIXED_Q;               // Filter resonance. This is defined as 1/Q, so a value of 2 = no resonance, and lower values = more resonance. A value of 0 may silence the filter however.
-float F1 = 0;                    // Used internally by the filter (frequency)
-float F = 0;                     // Filter cutoff frequency, although not quite expressed as 1:1 for frequency
-float H = 0;                     // High pass filter output value
-float B = 0;                     // Band pass filter output value
-float L = 0;                     // Low pass filter output value
-float N = 0;                     // Notch filter output value
-
-
 
 ////////////////////////////////////////////////////////////////////////
 // Effect Load event
@@ -70,15 +57,8 @@ void MODFX_INIT(uint32_t platform, uint32_t api)
    // Initialize the random table index
    randomIndex = 0; //index in the random table
    
-   // Initialize the filter. Again, you could put the filter in a class and call the constructor here etc, but
-   // for simplicity's sake we'll keep this straightforward C.
-   F = INITIAL_FREQUENCY;
-   Q = FIXED_Q;
-   B = 0;
-   L = 0;
-   N = 0;
-   D1 = 0;   
-   D2 = 0;
+   // Initialize the filter
+   filter = ChamberlinFilter{INITIAL_FREQUENCY, FIXED_Q};
    effectDepth = INITIAL_FREQUENCY_DEVIATION;   //Initialize the initial effect depth
    
 }
@@ -153,6 +133,7 @@ void MODFX_PROCESS(const float *main_xn, float *main_yn,
          
          // Set the filter frequency here
          F = CENTRE_FREQUENCY + (randomValueF*effectDepth); 
+		 filter.SetFc(F);
          
          // Increment and roll over the random table index
          randomIndex++;
@@ -169,20 +150,13 @@ void MODFX_PROCESS(const float *main_xn, float *main_yn,
       mx++; // Advance the input pointer once more to skip the right channel input - we only use the left channel as an input.      
       
       //Run the chamberlin filter: 
-      
-      F1 = TWOPI * F / SAMPLE_RATE;    // Calculate the F1 value(2pi * filter frequency / samplerate)
-      L = D2 + F1 * D1;                // Calculate the low pass portion
-      H = sigIn - L - Q * D1;          // Calculate the high pass portion
-      B = F1 * H + D1;                 // Calculate the bandpass portion
-      N = H + L;                       // Calculate the notch portion
-      D1 = B;                          // Store the bandpass result into the bandpass delay value 
-      D2 = L;                          // Store the low pass result into the low pass delay value
-      
+	  filter.process(sigIn);
+     
       //*you can actually optimize this filter by removing the delays (D1 and D2) and simply using the 'last' bandpass and lowpass value, but 
       // for simplicities sake this is again kept as straightforward as possible.
       
       // We'll use the L - lowpass output. Change this to H for highpass, N for notch, and B for bandpass if you wish..
-      sigOut = L;      
+      sigOut = filter.GetLP();     
       
       // Send this out to the left channel      
       *(my++) = sigOut;
