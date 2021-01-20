@@ -24,12 +24,6 @@ RandomSampleHold::RandomSampleHold(float freq, float sample_rate)
 	fs = sample_rate;
 }
 
-// TODO: inline
-void RandomSampleHold::TickLfo()
-{
-	phase_accum += (lfo_freq / fs);
-}
-
 /**
  * Get random value.
  * If the LFO has completed a cycle, get a new random value from the LUT.

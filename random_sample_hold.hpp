@@ -32,9 +32,12 @@ class RandomSampleHold
 	public:
 		RandomSampleHold();
 		RandomSampleHold(float freq, float sample_rate);
-		void TickLfo();
 		float GetRandomValue();
 		float GetPhaseAccum() const {return phase_accum;}
 		int SetLfoFreq(float freq);
-
+		/**
+		* Increment the LFO accumulator, call every sample
+		*/
+		inline __attribute__((optimize("Ofast"),always_inline))
+		void TickLfo() {phase_accum += (lfo_freq / fs);}
 };
