@@ -34,10 +34,10 @@ class ChamberlinFilter
 		ChamberlinFilter();
 		ChamberlinFilter(float fc, float q);
 		void process(float x);
-		float GetHP() {return out_hp;}
-		float GetBP() {return out_bp;}
-		float GetLP() {return out_lp;}
-		float GetN() {return out_n;}
+		float GetHP() const {return out_hp;}
+		float GetBP() const {return out_bp;}
+		float GetLP() const {return out_lp;}
+		float GetN() const {return out_n;}
 		// TODO: make real setters with validation checks
 		void SetFc(float fc) {fc = fc;}
 		void SetQ(float q) {q = q;}
