@@ -22,9 +22,18 @@ delay_1(0), delay_2(0), f1(0), fc(fc), fq(q), out_bp(0), out_hp(0), out_lp(0), o
 {
 }
 
-ChamberlinFilter::ChamberlinFilter(float fc, float q, float fs):
-delay_1(0), delay_2(0), f1(0), fc(fc), fq(q), out_bp(0), out_hp(0), out_lp(0), out_n(0), fs(fs)
+ChamberlinFilter::ChamberlinFilter(float filterc, float filterq, float sample_rate)
 {
+	delay_1 = 0.;
+	delay_2 = 0.;
+	f1 = 0.;
+	SetFc(filterc);
+	SetQ(filterq);
+	out_hp = 0.;
+	out_bp = 0.;
+	out_lp = 0;
+	out_n = 0;
+	fs = sample_rate;
 }
 
 /**
