@@ -33,7 +33,6 @@ class ChamberlinFilter
 		ChamberlinFilter();
 		ChamberlinFilter(float fc, float q);
 		ChamberlinFilter(float fc, float q, float fs);
-		void process(float x);
 		float GetHP() const {return out_hp;}
 		float GetBP() const {return out_bp;}
 		float GetLP() const {return out_lp;}
@@ -41,5 +40,18 @@ class ChamberlinFilter
 		// TODO: make real setters with validation checks
 		void SetFc(float new_fc) {fc = new_fc;}
 		void SetQ(float new_q) {fq = new_q;}
+		// TODO: some profiling to see if inlining this does any good
+		// TODO: oversampling option
+		inline __attribute__((optimize("Ofast"),always_inline))
+		void process(float x)
+		{
+			f1 = TWOPI * fc / fs;				// Calculate the F1 value(2pi * filter frequency / samplerate)
+			out_lp = delay_2 + f1 * delay_1;	// Calculate the low pass portion
+			out_hp = x - out_lp - fq * delay_1;	// Calculate the high pass portion
+			out_bp = f1 * out_hp + delay_1;		// Calculate the bandpass portion
+			out_n = out_hp + out_lp;			// Calculate the notch portion
+			delay_1 = out_bp;					// Store the bandpass result into the bandpass delay value
+			delay_2 = out_lp;					// Store the low pass result into the low pass delay value
+		}
 
 };
