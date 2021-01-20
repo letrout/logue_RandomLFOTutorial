@@ -6,7 +6,7 @@ PROJECT = randomTutorial
 
 UCSRC =
 
-UCXXSRC = chamberlin_filter.cpp randomTutorial.cpp
+UCXXSRC = chamberlin_filter.cpp random_sample_hold.cpp randomTutorial.cpp
 
 UINCDIR =
 
