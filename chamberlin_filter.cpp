@@ -23,7 +23,8 @@ delay_1(0), delay_2(0), f1(0), fc(fc), fq(q), out_bp(0), out_hp(0), out_lp(0), o
 }
 
 // TODO: inline decorator
-void ChamberlinFilter::ProcessSample(float x)
+// TODO: oversampling option
+void ChamberlinFilter::process(float x)
 {
 	f1 = TWOPI * fc / fs;				// Calculate the F1 value(2pi * filter frequency / samplerate)
     out_lp = delay_2 + f1 * delay_1;	// Calculate the low pass portion
