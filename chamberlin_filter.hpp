@@ -35,7 +35,6 @@ class ChamberlinFilter
 
 	public:
 		ChamberlinFilter();
-		ChamberlinFilter(float fc, float q);
 		ChamberlinFilter(float filterc, float filterq, float sample_rate);
 		float GetHP() const {return out_hp;}
 		float GetBP() const {return out_bp;}
