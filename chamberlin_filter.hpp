@@ -1,3 +1,4 @@
+#pragma once
 ///////////////////////////////////////////////////////////
 //
 // Chamberlin filter DSP implementation
@@ -29,13 +30,15 @@ class ChamberlinFilter
 		float fs;		// Sample rate (samples/sec)
 
 	public:
+		// TODO: pass fs to constructor
 		ChamberlinFilter();
 		ChamberlinFilter(float fc, float q);
-		void ProcessSample(float x);
+		void process(float x);
 		float GetHP() {return out_hp;}
 		float GetBP() {return out_bp;}
 		float GetLP() {return out_lp;}
 		float GetN() {return out_n;}
+		// TODO: make real setters with validation checks
 		void SetFc(float fc) {fc = fc;}
 		void SetQ(float q) {q = q;}
 
