@@ -4,9 +4,9 @@
 
 PROJECT = randomTutorial
 
-UCSRC = randomTutorial.c
+UCSRC =
 
-UCXXSRC = 
+UCXXSRC = ./chamberlin_filter.cpp ./randomTutorial.cpp
 
 UINCDIR =
 
