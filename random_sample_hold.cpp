@@ -30,6 +30,13 @@ void RandomSampleHold::TickLfo()
 	phase_accum += (lfo_freq / fs);
 }
 
+/**
+ * Get random value.
+ * If the LFO has completed a cycle, get a new random value from the LUT.
+ * If the LFO has not completed a cycle, return the current random_value.
+ *
+ * @return the random value
+ */
 float RandomSampleHold::GetRandomValue()
 {
 	if (phase_accum >= 1)
