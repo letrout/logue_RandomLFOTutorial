@@ -11,8 +11,10 @@
 ///////////////////////////////////////////////////////////
 
 #define INITIAL_FREQUENCY 800
+#define FC_MIN 20		// Minimum allowed center frequency (Hz)
+#define FC_MAX 22000	// Maximum center frequency (Hz)
 #define FIXED_Q 0.17	// Do not reach zero nor do not exceed 2. Lower values = more resonance.
-#define SAMPLE_RATE 48000
+#define SAMPLE_RATE 48000	// Default sample rate (samples/sec)
 #define TWOPI 6.283185307 
 
 class ChamberlinFilter
@@ -21,7 +23,7 @@ class ChamberlinFilter
 		float delay_1;	// Used internally by the filter (1-sample delay for bandpass filter)
 		float delay_2;	// Used internally by the filter (1-sample delay for low pass filter)
 		float f1;		// Used internally by the filter (frequency)
-		float fc;		// Filter cutoff frequency (Hz), although not quite expressed as 1:1 for frequency
+		float fc;		// Filter center frequency (Hz), although not quite expressed as 1:1 for frequency
 		float fq;		// Filter resonance. This is defined as 1/Q, so a value of 2 = no resonance, and lower values = more resonance. A value of 0 may silence the filter however.
 		float out_hp;	// High pass filter output value
 		float out_bp;	// Band pass filter output value
@@ -38,7 +40,7 @@ class ChamberlinFilter
 		float GetLP() const {return out_lp;}
 		float GetN() const {return out_n;}
 		// TODO: make real setters with validation checks
-		void SetFc(float new_fc) {fc = new_fc;}
+		int SetFc(float new_fc);
 		void SetQ(float new_q) {fq = new_q;}
 		// TODO: some profiling to see if inlining this does any good
 		// TODO: oversampling option
