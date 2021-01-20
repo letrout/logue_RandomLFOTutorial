@@ -39,7 +39,7 @@ class ChamberlinFilter
 		float GetLP() const {return out_lp;}
 		float GetN() const {return out_n;}
 		// TODO: make real setters with validation checks
-		void SetFc(float fc) {fc = fc;}
-		void SetQ(float q) {q = q;}
+		void SetFc(float new_fc) {fc = new_fc;}
+		void SetQ(float new_q) {fq = new_q;}
 
 };
