@@ -10,6 +10,9 @@
 // this is provided for informational purposes only and is to be
 // used at your own risk.
 //
+// Modified by Joel Luth to implement the LFO/sample&hold and filter
+// in C++ classes
+//
 ////////////////////////////////////////////////////////////////////////
 //Includes
 #include "usermodfx.h"
