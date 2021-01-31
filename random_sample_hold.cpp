@@ -11,16 +11,19 @@
 
 #include "random_sample_hold.hpp"
 
-RandomSampleHold::RandomSampleHold():
-phase_accum(0), lfo_freq(LFO_FREQ_INIT), random_index(0), fs(SAMPLE_RATE)
+RandomSampleHold::RandomSampleHold()
+	: phase_accum(0),
+	  lfo_freq(LFO_FREQ_INIT),
+	  random_index(0),
+	  fs(SAMPLE_RATE)
 {
 }
 
 RandomSampleHold::RandomSampleHold(float freq, float sample_rate)
+	: phase_accum(0),
+	  random_index(0)
 {
-	phase_accum = 0.;
 	lfo_freq = freq;
-	random_index = 0;
 	fs = sample_rate;
 }
 
