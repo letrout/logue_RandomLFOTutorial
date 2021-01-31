@@ -23,10 +23,10 @@
 class RandomSampleHold
 {
 	private:
-		float phase_accum;
-		float lfo_freq;
-		uint16_t random_index;
-		float random_value;
+		float phase_accum = 0;
+		float lfo_freq = LFO_FREQ_INIT;
+		uint16_t random_index = 0;
+		float random_value = 0;
 		float fs;		// Sample rate (samples/sec)
 
 	public:

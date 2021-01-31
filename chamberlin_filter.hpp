@@ -22,16 +22,16 @@
 class ChamberlinFilter
 {
 	private:
-		float delay_1;	// Used internally by the filter (1-sample delay for bandpass filter)
-		float delay_2;	// Used internally by the filter (1-sample delay for low pass filter)
-		float f1;		// Used internally by the filter (frequency)
-		float fc;		// Filter center frequency (Hz), although not quite expressed as 1:1 for frequency
-		float fq;		// Filter resonance. This is defined as 1/Q, so a value of 2 = no resonance, and lower values = more resonance. A value of 0 may silence the filter however.
-		float out_hp;	// High pass filter output value
-		float out_bp;	// Band pass filter output value
-		float out_lp;	// Low pass filter output value
-		float out_n;	// Notch filter output value
-		float fs;		// Sample rate (samples/sec)
+		float delay_1 = 0;	// Used internally by the filter (1-sample delay for bandpass filter)
+		float delay_2 = 0;	// Used internally by the filter (1-sample delay for low pass filter)
+		float f1 = 0;		// Used internally by the filter (frequency)
+		float fc = INITIAL_FREQUENCY;		// Filter center frequency (Hz), although not quite expressed as 1:1 for frequency
+		float fq = FIXED_Q;			// Filter resonance. This is defined as 1/Q, so a value of 2 = no resonance, and lower values = more resonance. A value of 0 may silence the filter however.
+		float out_hp = 0;	// High pass filter output value
+		float out_bp = 0;	// Band pass filter output value
+		float out_lp = 0;	// Low pass filter output value
+		float out_n = 0;	// Notch filter output value
+		float fs;			// Sample rate (samples/sec)
 
 	public:
 		ChamberlinFilter();
